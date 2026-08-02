@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en" data-variant="after">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Workspace Settings — Functional → Refined benchmark</title><script>document.documentElement.dataset.variant=new URLSearchParams(location.search).get('variant')==='before'?'before':'after'</script><link rel="stylesheet" href="../assets/demo.css"></head>
+<body>
+  <div class="benchmark-note"><strong>Synthetic benchmark</strong> Matched content, behavior and 1280 × 800 viewport · <span data-variant-label>after</span></div>
+  <div class="demo-shell">
+    <aside class="sidebar"><div class="brand"><span class="brand-mark">O</span> Orbit</div><nav class="nav" aria-label="Primary"><a href="#"><span class="nav-icon">⌂</span> Home</a><a href="#"><span class="nav-icon">◇</span> Projects</a><a href="#"><span class="nav-icon">◎</span> Team</a><a class="active" href="#"><span class="nav-icon">⚙</span> Settings</a></nav></aside>
+    <main class="main">
+      <header class="topbar"><div class="page-heading"><span class="eyebrow">Workspace</span><h1>Settings</h1><p class="page-copy">Manage workspace details, defaults and notifications.</p></div><div class="actions"><button class="button primary" data-action data-message="Changes saved">Save changes</button></div></header>
+      <div class="settings-layout">
+        <nav class="settings-tabs" aria-label="Settings sections"><button class="active" data-tab>General</button><button data-tab>Members</button><button data-tab>Billing</button><button data-tab>Integrations</button></nav>
+        <form class="panel settings-form" onsubmit="return false">
+          <section class="form-section"><h2>Workspace profile</h2><p>Shown to everyone who belongs to this workspace.</p><div class="field"><label for="name">Workspace name</label><input id="name" value="Orbit Product Team"><span class="help">Use the name your team recognizes.</span></div><div class="field-row"><div class="field"><label for="slug">Workspace URL</label><input id="slug" value="orbit-product"></div><div class="field"><label for="timezone">Timezone</label><select id="timezone"><option>Europe / Rome</option><option>America / New York</option></select></div></div></section>
+          <section class="form-section"><h2>Project defaults</h2><p>Applied when a teammate creates a new project.</p><div class="field-row"><div class="field"><label for="visibility">Default visibility</label><select id="visibility"><option>Private</option><option>Workspace</option></select></div><div class="field"><label for="region">Data region</label><select id="region"><option>European Union</option><option>United States</option></select></div></div></section>
+          <section class="form-section"><h2>Notifications</h2><p>Choose which operational updates reach the workspace.</p><label class="switch-row"><span><strong>Deployment alerts</strong><p class="muted">Notify members when production status changes.</p></span><input class="switch" type="checkbox" checked></label><label class="switch-row"><span><strong>Weekly summary</strong><p class="muted">Send a performance digest every Monday.</p></span><input class="switch" type="checkbox" checked></label></section>
+          <div class="form-actions"><button class="button primary" data-action data-message="Changes saved">Save changes</button></div>
+        </form>
+      </div>
+    </main>
+  </div><div class="toast" role="status" aria-live="polite"></div><script src="../assets/demo.js"></script>
+</body></html>

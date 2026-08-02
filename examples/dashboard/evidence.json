@@ -1,0 +1,10 @@
+{
+  "id": "dashboard-release-health",
+  "title": "Operational dashboard",
+  "classification": "synthetic-benchmark",
+  "surface": "Release health dashboard",
+  "viewport": { "width": 1280, "height": 800 },
+  "invariants": ["Same copy and data", "Same navigation and controls", "Same responsive breakpoint", "No new dependency"],
+  "changes": ["Strengthened page and metric hierarchy", "Reduced border noise", "Aligned semantic statuses", "Improved rhythm and focus visibility"],
+  "verification": ["Matched viewport screenshots", "Primary controls exercised", "390px page overflow check", "Keyboard focus inspection"]
+}

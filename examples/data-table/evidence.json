@@ -1,0 +1,10 @@
+{
+  "id": "data-table-review-queue",
+  "title": "Data table",
+  "classification": "synthetic-benchmark",
+  "surface": "Asset review queue",
+  "viewport": { "width": 1280, "height": 800 },
+  "invariants": ["Same rows, columns and statuses", "Same search and row actions", "Same filters", "No new dependency"],
+  "changes": ["Reduced gridline noise", "Improved scan paths and numeric alignment", "Clarified semantic statuses", "Preserved horizontal table access on small screens"],
+  "verification": ["Matched viewport screenshots", "Search and actions exercised", "390px page overflow check", "Keyboard focus inspection"]
+}

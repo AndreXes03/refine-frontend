@@ -1,0 +1,10 @@
+{
+  "id": "settings-workspace",
+  "title": "Settings form",
+  "classification": "synthetic-benchmark",
+  "surface": "Workspace settings form",
+  "viewport": { "width": 1280, "height": 800 },
+  "invariants": ["Same labels, values and helper copy", "Same form controls and save action", "Same tab behavior", "No new dependency"],
+  "changes": ["Grouped related fields", "Increased control and target clarity", "Separated primary action from navigation", "Added visible keyboard focus"],
+  "verification": ["Matched viewport screenshots", "Fields and switches exercised", "390px page overflow check", "Keyboard focus inspection"]
+}
