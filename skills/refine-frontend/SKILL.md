@@ -138,7 +138,7 @@ Verification has three independent gates:
 - Ask whether every added visual element has a job.
 - Reject a prettier screenshot if usability or behavior regressed.
 
-See [verification.md](references/verification.md) for the sign-off protocol.
+See [verification.md](references/verification.md) for the sign-off protocol. When the result will be published or used as proof, also follow [demonstration-protocol.md](references/demonstration-protocol.md) so the pair keeps the same content, behavior, state and viewport and clearly labels synthetic fixtures.
 
 ### 8. Persist decisions and feedback
 
