@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-variant="after">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Release Console — Functional → Refined benchmark</title>
+  <script>document.documentElement.dataset.variant=new URLSearchParams(location.search).get('variant')==='before'?'before':'after'</script>
+  <link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+  <div class="benchmark-note"><strong>Synthetic benchmark</strong> Matched content, behavior and 1280 × 800 viewport · <span data-variant-label>after</span></div>
+  <div class="demo-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">R</span> Relay</div>
+      <nav class="nav" aria-label="Primary">
+        <a class="active" href="#"><span class="nav-icon">●</span> Overview</a>
+        <a href="#"><span class="nav-icon">↗</span> Deployments</a>
+        <a href="#"><span class="nav-icon">◇</span> Environments</a>
+        <a href="#"><span class="nav-icon">!</span> Incidents</a>
+        <a href="#"><span class="nav-icon">⚙</span> Settings</a>
+      </nav>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <div class="page-heading"><span class="eyebrow">Production</span><h1>Release health</h1><p class="page-copy">Delivery performance across the last 30 days.</p></div>
+        <div class="actions"><button class="button" data-action data-message="Report exported">Export</button><button class="button primary" data-action data-message="Deployment started">New deployment</button></div>
+      </header>
+      <section class="metrics" aria-label="Key metrics">
+        <article class="panel metric"><span class="metric-label">Deployment success</span><div class="metric-value">97.8%</div><span class="status success">+1.4% this month</span></article>
+        <article class="panel metric"><span class="metric-label">Median cycle time</span><div class="metric-value">18m</div><span class="status success">4m faster</span></article>
+        <article class="panel metric"><span class="metric-label">Open incidents</span><div class="metric-value">3</div><span class="status warning">1 needs review</span></article>
+      </section>
+      <section class="dashboard-grid">
+        <article class="panel"><div class="panel-title"><div><h2>Deployments per day</h2><p class="page-copy">Successful production releases</p></div><div class="segmented"><button data-tab>7D</button><button class="active" data-tab>30D</button></div></div><div class="chart" aria-label="Bar chart"><div class="bar" style="height:42%"><span>Mon</span></div><div class="bar" style="height:65%"><span>Tue</span></div><div class="bar" style="height:54%"><span>Wed</span></div><div class="bar highlight" style="height:88%"><span>Thu</span></div><div class="bar" style="height:72%"><span>Fri</span></div><div class="bar" style="height:46%"><span>Sat</span></div><div class="bar" style="height:58%"><span>Sun</span></div></div></article>
+        <article class="panel"><div class="panel-title"><div><h2>Recent deployments</h2><p class="page-copy">Latest production activity</p></div></div><div class="deployments"><div class="deployment"><div><strong>checkout-api</strong><small>12 minutes ago · #2841</small></div><span class="status success">Live</span></div><div class="deployment"><div><strong>merchant-web</strong><small>43 minutes ago · #917</small></div><span class="status success">Live</span></div><div class="deployment"><div><strong>billing-worker</strong><small>1 hour ago · #612</small></div><span class="status warning">Review</span></div><div class="deployment"><div><strong>identity-api</strong><small>3 hours ago · #1432</small></div><span class="status success">Live</span></div></div></article>
+      </section>
+    </main>
+  </div><div class="toast" role="status" aria-live="polite"></div><script src="../assets/demo.js"></script>
+</body></html>
