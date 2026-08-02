@@ -46,6 +46,7 @@ def validate_skill() -> None:
         raise AssertionError("openai.yaml default_prompt must invoke the skill")
 
     required_references = {
+        "demonstration-protocol.md",
         "research-and-rules.md",
         "visual-contract.md",
         "verification.md",
@@ -53,6 +54,26 @@ def validate_skill() -> None:
     actual_references = {path.name for path in (SKILL / "references").glob("*.md")}
     if actual_references != required_references:
         raise AssertionError("Unexpected reference set")
+
+
+def validate_examples() -> None:
+    cases = {"dashboard", "settings", "data-table"}
+    for case in cases:
+        directory = ROOT / "examples" / case
+        document = (directory / "index.html").read_text(encoding="utf-8")
+        evidence = json.loads((directory / "evidence.json").read_text(encoding="utf-8"))
+        if evidence.get("classification") != "synthetic-benchmark":
+            raise AssertionError(f"{case} must be labeled as a synthetic benchmark")
+        if evidence.get("viewport") != {"width": 1280, "height": 800}:
+            raise AssertionError(f"{case} has an unexpected evidence viewport")
+        if "?variant=before" in document or "?variant=after" in document:
+            raise AssertionError(f"{case} must use one shared document for both variants")
+        if "data-variant" not in document or "Synthetic benchmark" not in document:
+            raise AssertionError(f"{case} is missing comparison safeguards")
+        for capture in ("before.png", "after.png"):
+            path = directory / capture
+            if not path.is_file() or path.stat().st_size < 10_000:
+                raise AssertionError(f"{case}/{capture} is missing or too small")
 
 
 def scan_public_tree() -> None:
@@ -123,6 +144,7 @@ def packaging_check() -> None:
         "refine-frontend/agents/openai.yaml",
         "refine-frontend/scripts/refine_workspace.py",
         "refine-frontend/references/research-and-rules.md",
+        "refine-frontend/references/demonstration-protocol.md",
         "refine-frontend/references/visual-contract.md",
         "refine-frontend/references/verification.md",
     }
@@ -134,6 +156,7 @@ def packaging_check() -> None:
 
 def main() -> int:
     validate_skill()
+    validate_examples()
     scan_public_tree()
     integration_checks()
     packaging_check()
