@@ -1,0 +1,78 @@
+name: Refinement feedback
+description: Report what a Functional → Refined decision improved or regressed.
+title: "[Feedback] "
+labels:
+  - feedback
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Share only public-safe material. Remove client names, private URLs, credentials, and proprietary screenshots.
+  - type: input
+    id: version
+    attributes:
+      label: Skill version
+      placeholder: v0.1.0
+    validations:
+      required: true
+  - type: input
+    id: surface
+    attributes:
+      label: Product surface
+      description: For example settings, analytics dashboard, table, onboarding, or form.
+    validations:
+      required: true
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework
+      options:
+        - Next.js
+        - React
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: decision
+    attributes:
+      label: Decision outcome
+      options:
+        - Accepted
+        - Modified
+        - Rejected
+        - Reverted after use
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: What changed?
+      description: Name the visual decision, affected component, and reason proposed by the skill.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What improved or regressed?
+      description: Include behavior, responsive fit, accessibility, clarity, coherence, or contextual fit.
+    validations:
+      required: true
+  - type: textarea
+    id: invariant
+    attributes:
+      label: Relevant invariant
+      description: What had to remain unchanged, and did it remain true?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Public before/after evidence
+      description: Optional screenshots, repository, or reproducible example. Do not attach private work.
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-safety check
+      options:
+        - label: I removed private URLs, credentials, client material, and proprietary assets.
+          required: true

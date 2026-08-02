@@ -1,0 +1,4 @@
+interface:
+  display_name: "Functional → Refined"
+  short_description: "Refine working product UI with minimal code delta"
+  default_prompt: "Use $refine-frontend to improve this working product UI without changing its behavior."
