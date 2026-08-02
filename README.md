@@ -61,9 +61,21 @@ python3 scripts/refine_workspace.py feedback \
   --note "Keep the stronger heading contrast."
 ```
 
+## Before / After evidence
+
+Three reproducible synthetic benchmarks show what the skill changes—and what it deliberately leaves alone. Each pair uses one shared HTML document, the same copy, data, controls, state and 1280 × 800 viewport. Only `?variant=before|after` changes the visual layer.
+
+| Surface | Before | After | Material refinement |
+| --- | --- | --- | --- |
+| Operational dashboard | ![Functional dashboard baseline](examples/dashboard/before.png) | ![Refined operational dashboard](examples/dashboard/after.png) | hierarchy, metric scan path, rhythm, semantic status |
+| Settings form | ![Functional settings baseline](examples/settings/before.png) | ![Refined settings form](examples/settings/after.png) | grouping, control clarity, primary action, focus visibility |
+| Data table | ![Functional table baseline](examples/data-table/before.png) | ![Refined data table](examples/data-table/after.png) | density, alignment, status semantics, row scan path |
+
+Open any fixture locally with `?variant=before` or `?variant=after`. The evidence contract for each case is stored beside its HTML in `evidence.json`; the skill's publication rules live in `references/demonstration-protocol.md`.
+
 ## Install the skill
 
-Download `refine-frontend-skill-v0.1.0.zip` from the [latest release](https://github.com/AndreXes03/refine-frontend/releases/latest). The same package works in Codex and Claude Code.
+Download `refine-frontend-skill-v0.1.1.zip` from the [latest release](https://github.com/AndreXes03/refine-frontend/releases/latest). The same package works in Codex and Claude Code.
 
 ### Codex
 
@@ -141,6 +153,7 @@ Rules should enter later releases only when they generalize without increasing f
 ## Repository
 
 - `skills/refine-frontend/` — installable Codex and Claude Code skill;
+- `examples/` — reproducible matched before/after benchmarks and evidence manifests;
 - `scripts/build_release.py` — deterministic ZIP and checksum generation;
 - `tests/run_checks.py` — skill, packaging and integration checks;
 - `.github/ISSUE_TEMPLATE/refinement-feedback.yml` — structured field feedback.
