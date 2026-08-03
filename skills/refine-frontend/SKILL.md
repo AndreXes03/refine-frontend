@@ -111,13 +111,16 @@ Foundation is mandatory. Signature is optional and must never compensate for wea
 
 ### 6. Diagnose before editing
 
-Read [research-and-rules.md](references/research-and-rules.md). Distinguish three kinds of evidence:
+Read [research-and-rules.md](references/research-and-rules.md) and [quality-floor.md](references/quality-floor.md). Distinguish four kinds of evidence:
 
 - **Observed defect**: visible or measurable in this product.
 - **Standard violation**: traceable to a relevant standard such as WCAG.
+- **System rule**: established by the product's design system, platform, or accepted feedback.
 - **Design hypothesis**: contextual judgment that requires visual comparison and human acceptance.
 
 Rank findings by user impact, recurrence, and confidence. Limit the first pass to three to five coherent changes. Prefer root fixes in tokens or shared components when the inconsistency recurs; prefer local fixes when the issue is surface-specific.
+
+Establish the surface's quality-floor baseline before editing. Inspect structure and comprehension, typography and zoom, contrast and color, keyboard and focus, targets and interaction feedback, forms and recovery, responsive fit, and dense-data grouping. Do not trade a passing area for visual novelty. Complete `qualityFloor.checks` with evidence after implementation; use `not-applicable` only with a concrete surface-specific reason.
 
 ### 7. Refactor in impact order
 
@@ -155,7 +158,9 @@ Verification has three independent gates:
 
 - Inspect desktop and mobile screenshots; use the densest realistic state.
 - Check page-level overflow, clipping, overlap, text wrapping, image distortion, layering, and layout shift.
-- Check keyboard focus, contrast, target size/spacing, reduced motion, and 320 CSS px reflow where applicable.
+- Check semantic structure, keyboard focus and order, accessible names, contrast and color independence, target size/spacing, text resize/spacing, reduced motion, and 320 CSS px reflow where applicable.
+- Exercise one relevant failure or recovery state; verify action feedback and system status without relying only on color or hover.
+- Complete every required entry in `qualityFloor.checks` with the route, state, measurement, screenshot, command, or reason that supports the result.
 - Treat numeric checks as supporting evidence, not a replacement for screenshot inspection.
 
 **Design gate**
@@ -169,7 +174,7 @@ Verification has three independent gates:
 - Ask whether every added visual element has a job.
 - Reject a prettier screenshot if usability or behavior regressed.
 
-See [verification.md](references/verification.md) for the sign-off protocol. When the result will be published or used as proof, also follow [demonstration-protocol.md](references/demonstration-protocol.md) so the pair keeps the same content, behavior, state and viewport and clearly labels synthetic fixtures.
+See [quality-floor.md](references/quality-floor.md) for the operational rules and [verification.md](references/verification.md) for the sign-off protocol. When the result will be published or used as proof, also follow [demonstration-protocol.md](references/demonstration-protocol.md) so the pair keeps the same content, behavior, state and viewport and clearly labels synthetic fixtures.
 
 ### 9. Persist decisions and feedback
 
@@ -192,6 +197,7 @@ python3 <skill-dir>/scripts/refine_workspace.py validate --strict --project <pro
 ```
 
 Plain `validate` keeps legacy workspaces readable. `validate --strict` is the release gate and rejects placeholders or an incomplete specificity contract.
+It also rejects an incomplete quality-floor record; do not sign off while a required area is untested or unsupported by evidence.
 
 ## Final response
 

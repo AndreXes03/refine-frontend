@@ -69,6 +69,8 @@ Sources:
 
 These checks can identify likely failures, but this skill does not certify WCAG conformance.
 
+Use [quality-floor.md](quality-floor.md) for the complete operational pass across structure, typography, contrast, keyboard and focus, targets and feedback, forms and recovery, responsive fit, and dense data. Record evidence for each area in `qualityFloor.checks`; keep this section as the compact standards basis.
+
 - **Contrast**: preserve WCAG 2.2 text and non-text contrast requirements. Validate actual computed colors and states, including disabled and focus states where applicable. https://www.w3.org/TR/WCAG22/
 - **Focus**: every keyboard-operable control must expose a visible focus indicator; do not remove the browser outline without an adequate replacement. https://www.w3.org/WAI/WCAG22/Understanding/focus-visible
 - **Reflow**: non-exempt content should work at a width equivalent to 320 CSS px without loss of information/functionality or two-dimensional scrolling. Tables and other genuinely two-dimensional content can be scoped exceptions, not excuses for page-level overflow. https://www.w3.org/WAI/WCAG22/Understanding/reflow.html

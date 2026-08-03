@@ -39,6 +39,8 @@ def validate_skill() -> None:
         raise AssertionError("SKILL.md exceeds the progressive-disclosure limit")
     if "anti-convergence gate" not in text or "patternSelection" not in text:
         raise AssertionError("SKILL.md is missing the pattern-convergence guardrail")
+    if "quality-floor.md" not in text or "qualityFloor.checks" not in text:
+        raise AssertionError("SKILL.md is missing the evidence-backed quality floor")
 
     agent = yaml.safe_load((SKILL / "agents" / "openai.yaml").read_text(encoding="utf-8"))
     interface = agent.get("interface", {})
@@ -49,6 +51,7 @@ def validate_skill() -> None:
 
     required_references = {
         "demonstration-protocol.md",
+        "quality-floor.md",
         "research-and-rules.md",
         "visual-contract.md",
         "verification.md",
@@ -164,6 +167,21 @@ def integration_checks() -> None:
             }
         )
         contract_path.write_text(json.dumps(contract, indent=2) + "\n", encoding="utf-8")
+        incomplete_quality = subprocess.run(
+            [sys.executable, str(UTILITY), "validate", "--strict", "--project", str(project)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if incomplete_quality.returncode == 0 or "qualityFloor" not in incomplete_quality.stderr:
+            raise AssertionError("Strict validation must reject missing quality-floor evidence")
+
+        for check_id in contract["qualityFloor"]["checks"]:
+            contract["qualityFloor"]["checks"][check_id] = {
+                "status": "pass",
+                "evidence": [f"Synthetic integration evidence for {check_id}."],
+            }
+        contract_path.write_text(json.dumps(contract, indent=2) + "\n", encoding="utf-8")
         run(sys.executable, str(UTILITY), "validate", "--strict", "--project", str(project))
         run(
             sys.executable,
@@ -200,6 +218,7 @@ def packaging_check() -> None:
         "refine-frontend/agents/openai.yaml",
         "refine-frontend/scripts/refine_workspace.py",
         "refine-frontend/references/research-and-rules.md",
+        "refine-frontend/references/quality-floor.md",
         "refine-frontend/references/demonstration-protocol.md",
         "refine-frontend/references/visual-contract.md",
         "refine-frontend/references/verification.md",

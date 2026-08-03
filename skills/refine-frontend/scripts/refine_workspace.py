@@ -18,6 +18,17 @@ LEDGER = "change-ledger.md"
 LEVELS = {"high", "medium", "low"}
 DEPTHS = {"foundations", "surface", "system"}
 STATUSES = {"accepted", "modified", "rejected", "reverted"}
+QUALITY_STATUSES = {"pass", "not-applicable"}
+QUALITY_CHECKS = {
+    "structureAndComprehension",
+    "typographyAndZoom",
+    "contrastAndColor",
+    "keyboardAndFocus",
+    "targetsStatesAndFeedback",
+    "formsErrorsAndRecovery",
+    "responsiveAndOverflow",
+    "densityGroupingAndData",
+}
 
 
 def timestamp() -> str:
@@ -87,6 +98,12 @@ def contract_template(surface: str) -> dict[str, Any]:
             "layout": {},
             "states": {},
             "responsive": {},
+        },
+        "qualityFloor": {
+            "checks": {
+                check: {"status": "TODO", "evidence": []}
+                for check in sorted(QUALITY_CHECKS)
+            }
         },
         "signature": {
             "enabled": False,
@@ -211,6 +228,39 @@ def validate_contract(value: Any, *, strict: bool = False) -> list[str]:
     if missing:
         errors.append("contract.foundations is missing: " + ", ".join(missing))
 
+    quality_floor = root.get("qualityFloor")
+    if strict and quality_floor is None:
+        errors.append("contract.qualityFloor is required for strict validation")
+    if quality_floor is not None:
+        quality_floor = require_mapping(quality_floor, "contract.qualityFloor", errors)
+        checks = require_mapping(quality_floor.get("checks"), "contract.qualityFloor.checks", errors)
+        if strict:
+            missing_checks = sorted(QUALITY_CHECKS - checks.keys())
+            if missing_checks:
+                errors.append(
+                    "contract.qualityFloor.checks is missing: " + ", ".join(missing_checks)
+                )
+        for check_id, result in checks.items():
+            label = f"contract.qualityFloor.checks.{check_id}"
+            if check_id not in QUALITY_CHECKS:
+                errors.append(f"{label} is not a supported quality-floor check")
+                continue
+            result = require_mapping(result, label, errors)
+            status = result.get("status")
+            if strict and status not in QUALITY_STATUSES:
+                errors.append(f"{label}.status must be pass or not-applicable")
+            elif not strict and status not in QUALITY_STATUSES | {"TODO"}:
+                errors.append(f"{label}.status must be TODO, pass, or not-applicable")
+            evidence = result.get("evidence")
+            if not isinstance(evidence, list):
+                errors.append(f"{label}.evidence must be an array")
+            elif strict:
+                usable_evidence = [
+                    item for item in evidence if isinstance(item, str) and item.strip()
+                ]
+                if not usable_evidence:
+                    errors.append(f"{label}.evidence must include at least one concrete item")
+
     signature = require_mapping(root.get("signature"), "contract.signature", errors)
     if not isinstance(signature.get("enabled"), bool):
         errors.append("contract.signature.enabled must be a boolean")
@@ -330,7 +380,7 @@ def build_parser() -> argparse.ArgumentParser:
     validate_parser.add_argument(
         "--strict",
         action="store_true",
-        help="reject placeholders and require the completed specificity contract",
+        help="reject placeholders and require completed specificity and quality-floor evidence",
     )
     validate_parser.set_defaults(func=command_validate)
 

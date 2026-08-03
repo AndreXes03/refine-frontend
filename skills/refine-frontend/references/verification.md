@@ -15,6 +15,8 @@ Before editing, list:
 
 Map each item to a functional check and a visual check. Do not infer visual success from passing tests.
 
+Initialize the eight checks in `qualityFloor.checks` and identify the route, state, measurement, capture, or command that can prove each one. Use [quality-floor.md](quality-floor.md) for the rules and evidence expectations.
+
 ## Screenshot set
 
 Capture viewport screenshots rather than relying only on full-page images:
@@ -39,6 +41,9 @@ Check:
 - reduced-motion preference does not hide essential state changes;
 - contrast and target sizing with an appropriate checker or computed styles;
 - media and dynamic regions reserve stable geometry.
+- rendered text remains usable at 200% zoom and with WCAG text-spacing overrides when the changed surface can be affected;
+- controls retain visible labels or accessible names, and status, selection, errors, and priority do not depend on color alone;
+- the primary task exposes timely feedback and a recoverable relevant failure state.
 
 Numeric checks can miss visibly obscured or awkward content. A screenshot failure remains a failure even when DOM metrics pass.
 
@@ -68,6 +73,7 @@ Pass only when all are true:
 - at least two product-specific signals remain visible when brand names and accent color are ignored;
 - the mobile result follows the recorded task-preserving transformation instead of mechanically stacking desktop regions;
 - strict workspace validation passes with no placeholder decisions;
+- every required quality-floor check is `pass` or concretely `not-applicable` and includes evidence;
 - unresolved risks and exclusions are reported plainly.
 
 Do not claim WCAG conformance from this protocol alone. Do not use an aesthetic score unless it comes from a named, reproducible human study.

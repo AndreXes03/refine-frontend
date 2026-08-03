@@ -51,6 +51,18 @@ The contract is a project-local decision record, not a design-system replacement
     "states": {},
     "responsive": {}
   },
+  "qualityFloor": {
+    "checks": {
+      "structureAndComprehension": {"status": "TODO", "evidence": []},
+      "typographyAndZoom": {"status": "TODO", "evidence": []},
+      "contrastAndColor": {"status": "TODO", "evidence": []},
+      "keyboardAndFocus": {"status": "TODO", "evidence": []},
+      "targetsStatesAndFeedback": {"status": "TODO", "evidence": []},
+      "formsErrorsAndRecovery": {"status": "TODO", "evidence": []},
+      "responsiveAndOverflow": {"status": "TODO", "evidence": []},
+      "densityGroupingAndData": {"status": "TODO", "evidence": []}
+    }
+  },
   "signature": {
     "enabled": false,
     "channel": null,
@@ -80,6 +92,9 @@ The contract is a project-local decision record, not a design-system replacement
 - Do not force novelty. Reuse a familiar pattern when it is the clearest match for the task, but document why it fits.
 - Prefer semantic roles (`action-primary`, `text-muted`) over raw values when the project already has or needs reusable tokens.
 - Preserve established brand values unless the user authorizes brand work.
+- Complete every `qualityFloor.checks` entry with `pass` or `not-applicable` and at least one concrete evidence string before strict validation. Evidence can name a route and state, measurement, screenshot, command, or surface-specific reason.
+- Do not use `not-applicable` for an unperformed check. If a required check cannot be completed, report the unresolved risk and stop sign-off.
+- Use [quality-floor.md](quality-floor.md) to interpret the checks. Treat its standards as blockers when applicable and its heuristics as contextual hypotheses rather than a visual preset.
 - Set `signature.enabled` only after foundation defects are resolved.
 - Use one signature channel. A channel can contain several coordinated properties, but it must express one idea.
 - Add explicit exclusions when a likely but unsuitable treatment should not recur, such as nested cards, decorative gradients, or always-on motion.

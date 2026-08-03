@@ -33,6 +33,7 @@ The frontend-skill ecosystem already has strong tools for generating bold interf
 - **Existing-product first** — product UI, dashboards, tools, settings, forms, tables and operational software.
 - **Constraint first** — routing, business logic, data, semantics, tests and public APIs are frozen before visual edits.
 - **Foundation before expression** — hierarchy, geometry and rhythm are fixed before one optional signature move.
+- **Evidence-backed quality floor** — eight readability and usability areas must pass or be concretely out of scope before sign-off.
 - **Task-specific pattern selection** — the skill records the native interaction topology and rejects generic shells that could fit any product.
 - **Persistent visual contract** — decisions survive the current agent session in `.visual-refactor/visual-contract.json`.
 - **Human feedback memory** — accepted, modified, rejected and reverted choices are recorded for later passes.
@@ -63,7 +64,7 @@ python3 scripts/refine_workspace.py feedback \
   --note "Keep the stronger heading contrast."
 ```
 
-Use plain validation while iterating or opening a legacy workspace. Use `--strict` before sign-off: it rejects placeholder decisions and incomplete product-specific pattern evidence.
+Use plain validation while iterating or opening a legacy workspace. Use `--strict` before sign-off: it rejects placeholder decisions, incomplete product-specific pattern evidence, and any quality-floor check without concrete evidence.
 
 ## Before / After evidence
 
@@ -79,7 +80,7 @@ Open any fixture locally with `?variant=before` or `?variant=after`. The evidenc
 
 ## Install the skill
 
-Download `refine-frontend-skill-v0.1.1.zip` from the [latest release](https://github.com/AndreXes03/refine-frontend/releases/latest). The same package works in Codex and Claude Code.
+Download `refine-frontend-skill-v0.2.0.zip` from the [latest release](https://github.com/AndreXes03/refine-frontend/releases/latest). The same package works in Codex and Claude Code.
 
 ### Codex
 
@@ -112,11 +113,12 @@ Restart Claude Code, then invoke `/refine-frontend` or ask Claude to use the ski
 2. Freeze functional, technical, content and brand invariants.
 3. Classify interaction load, information density, expression need and refinement depth.
 4. Map the task topology and reject context-free pattern defaults.
-5. Compile a machine-readable foundation, pattern and signature contract.
-6. Prioritize three to five coherent changes by impact, recurrence and confidence.
-7. Refactor typography, composition, rhythm, semantic color, morphology and states—in that order.
-8. Verify behavior, technical visual integrity, contextual design quality and convergence risk as separate gates.
-9. Persist implementation decisions and human feedback.
+5. Compile a machine-readable foundation, pattern, quality-floor and signature contract.
+6. Baseline structure, typography, contrast, focus, interaction feedback, recovery, responsive fit and density.
+7. Prioritize three to five coherent changes by impact, recurrence and confidence.
+8. Refactor typography, composition, rhythm, semantic color, morphology and states—in that order.
+9. Verify behavior, technical visual integrity, contextual design quality and convergence risk as separate gates.
+10. Persist implementation decisions and human feedback.
 
 ## Research basis
 
@@ -126,8 +128,10 @@ The method does not pretend that design quality can be reduced to a universal ch
 - Lavie and Tractinsky distinguished classical aesthetics—order and clarity—from expressive aesthetics—creativity and originality. This informs the mandatory **Foundation Layer** and limited **Signature Layer**. [Ben-Gurion University research portal](https://cris.bgu.ac.il/en/publications/assessing-dimensions-of-perceived-visual-aesthetics-of-web-sites-2/)
 - Research on aesthetics and perceived usability is mixed and context-dependent. The skill therefore keeps usability, technical integrity and visual judgment as independent gates. [Tractinsky et al. (2000)](https://cris.bgu.ac.il/en/publications/what-is-beautiful-is-usable-2/) · [Tuch et al. (2012)](https://edoc.unibas.ch/entities/publication/ebcfa3de-1a92-4195-b6fd-ab67d80af2aa)
 - Accessibility checks reference WCAG 2.2, but the skill explicitly does not certify conformance. [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- Readability guidance uses USWDS typography as a contextual baseline for running text, line measure and rhythm rather than a universal visual preset. [USWDS Typography](https://designsystem.digital.gov/components/typography/)
+- Interaction guidance uses WAI-ARIA APG for established keyboard and naming behavior, and GOV.UK's tested validation pattern for actionable recovery messages. [WAI-ARIA APG](https://www.w3.org/WAI/ARIA/apg/) · [GOV.UK validation](https://design-system.service.gov.uk/patterns/validation/)
 
-The full translation from evidence to operational rules is bundled inside the skill at `references/research-and-rules.md`.
+The full translation from evidence to operational rules is bundled inside the skill at `references/research-and-rules.md` and `references/quality-floor.md`.
 
 ## v0.1 scope
 
