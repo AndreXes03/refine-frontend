@@ -28,13 +28,29 @@
     });
   });
 
-  const search = document.querySelector("[data-table-search]");
+  const search = document.querySelector("[data-list-search]");
   if (search) {
     search.addEventListener("input", () => {
       const query = search.value.trim().toLowerCase();
-      document.querySelectorAll("tbody tr").forEach((row) => {
-        row.hidden = query !== "" && !row.textContent.toLowerCase().includes(query);
+      document.querySelectorAll("[data-search-item]").forEach((item) => {
+        item.hidden = query !== "" && !item.textContent.toLowerCase().includes(query);
       });
+    });
+  }
+
+  const workspaceName = document.querySelector("[data-workspace-name]");
+  const workspaceSlug = document.querySelector("[data-workspace-slug]");
+  const previewName = document.querySelector("[data-preview-name]");
+  const previewSlug = document.querySelector("[data-preview-slug]");
+  if (workspaceName && previewName) {
+    workspaceName.addEventListener("input", () => {
+      previewName.textContent = workspaceName.value.trim() || "Untitled workspace";
+    });
+  }
+  if (workspaceSlug && previewSlug) {
+    workspaceSlug.addEventListener("input", () => {
+      const slug = workspaceSlug.value.trim() || "workspace";
+      previewSlug.textContent = `orbit.so/${slug}`;
     });
   }
 })();

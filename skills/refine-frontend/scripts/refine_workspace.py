@@ -59,11 +59,15 @@ def contract_template(surface: str) -> dict[str, Any]:
         },
         "patternSelection": {
             "taskTopology": "TODO",
+            "dominantArtifact": "TODO",
             "nativePattern": "TODO",
             "navigationModel": "TODO",
             "compositionModel": "TODO",
             "existingPrimitives": [],
+            "productSpecificSignals": [],
+            "alternativePattern": "TODO",
             "rejectedDefaults": [],
+            "mobileTransformation": "TODO",
             "convergenceRisk": "medium",
             "rationale": "TODO",
         },
@@ -142,7 +146,7 @@ def require_mapping(value: Any, label: str, errors: list[str]) -> dict[str, Any]
     return value
 
 
-def validate_contract(value: Any) -> list[str]:
+def validate_contract(value: Any, *, strict: bool = False) -> list[str]:
     errors: list[str] = []
     root = require_mapping(value, "contract", errors)
     if root.get("schemaVersion") != 1:
@@ -162,14 +166,36 @@ def validate_contract(value: Any) -> list[str]:
         errors.append("contract.classification.refinementDepth must be foundations, surface, or system")
 
     pattern_selection = root.get("patternSelection")
+    if strict and pattern_selection is None:
+        errors.append("contract.patternSelection is required for strict validation")
     if pattern_selection is not None:
         pattern_selection = require_mapping(pattern_selection, "contract.patternSelection", errors)
-        for key in ("taskTopology", "nativePattern", "navigationModel", "compositionModel", "rationale"):
+        required_strings = [
+            "taskTopology",
+            "nativePattern",
+            "navigationModel",
+            "compositionModel",
+            "rationale",
+        ]
+        if strict:
+            required_strings.extend(("dominantArtifact", "alternativePattern", "mobileTransformation"))
+        for key in required_strings:
             if not isinstance(pattern_selection.get(key), str) or not pattern_selection.get(key, "").strip():
                 errors.append(f"contract.patternSelection.{key} must be a non-empty string")
-        for key in ("existingPrimitives", "rejectedDefaults"):
+            elif strict and pattern_selection[key].strip().upper() == "TODO":
+                errors.append(f"contract.patternSelection.{key} must replace the TODO placeholder")
+        required_arrays = ["existingPrimitives", "rejectedDefaults"]
+        if strict:
+            required_arrays.append("productSpecificSignals")
+        for key in required_arrays:
             if not isinstance(pattern_selection.get(key), list):
                 errors.append(f"contract.patternSelection.{key} must be an array")
+        if strict and isinstance(pattern_selection.get("productSpecificSignals"), list):
+            if len(pattern_selection["productSpecificSignals"]) < 2:
+                errors.append("contract.patternSelection.productSpecificSignals must include at least two items")
+        if strict and isinstance(pattern_selection.get("rejectedDefaults"), list):
+            if not pattern_selection["rejectedDefaults"]:
+                errors.append("contract.patternSelection.rejectedDefaults must include at least one item")
         if pattern_selection.get("convergenceRisk") not in LEVELS:
             errors.append("contract.patternSelection.convergenceRisk must be high, medium, or low")
 
@@ -241,7 +267,7 @@ def command_validate(args: argparse.Namespace) -> int:
     root = workspace(args.project)
     errors: list[str] = []
     try:
-        errors.extend(validate_contract(load_json(root / CONTRACT)))
+        errors.extend(validate_contract(load_json(root / CONTRACT), strict=args.strict))
     except ValueError as exc:
         errors.append(str(exc))
     try:
@@ -301,6 +327,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     validate_parser = subparsers.add_parser("validate", help="validate the workspace structure and JSON")
     validate_parser.add_argument("--project", default=".")
+    validate_parser.add_argument(
+        "--strict",
+        action="store_true",
+        help="reject placeholders and require the completed specificity contract",
+    )
     validate_parser.set_defaults(func=command_validate)
 
     feedback_parser = subparsers.add_parser("feedback", help="record or update a human decision")

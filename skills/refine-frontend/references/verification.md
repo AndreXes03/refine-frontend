@@ -65,6 +65,9 @@ Pass only when all are true:
 - accessibility was not knowingly degraded;
 - before/after evidence shows a coherent improvement;
 - every signature treatment supports the contract;
+- at least two product-specific signals remain visible when brand names and accent color are ignored;
+- the mobile result follows the recorded task-preserving transformation instead of mechanically stacking desktop regions;
+- strict workspace validation passes with no placeholder decisions;
 - unresolved risks and exclusions are reported plainly.
 
 Do not claim WCAG conformance from this protocol alone. Do not use an aesthetic score unless it comes from a named, reproducible human study.

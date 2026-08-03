@@ -55,6 +55,7 @@ The bundled dependency-free utility creates and validates this workspace:
 ```bash
 python3 scripts/refine_workspace.py init --project /path/to/app --surface "Settings / Profile"
 python3 scripts/refine_workspace.py validate --project /path/to/app
+python3 scripts/refine_workspace.py validate --strict --project /path/to/app
 python3 scripts/refine_workspace.py feedback \
   --project /path/to/app \
   --id VR-TYPE-001 \
@@ -62,15 +63,17 @@ python3 scripts/refine_workspace.py feedback \
   --note "Keep the stronger heading contrast."
 ```
 
+Use plain validation while iterating or opening a legacy workspace. Use `--strict` before sign-off: it rejects placeholder decisions and incomplete product-specific pattern evidence.
+
 ## Before / After evidence
 
 Three reproducible synthetic benchmarks show what the skill changes—and what it deliberately leaves alone. Each pair uses one shared HTML document, the same copy, data, controls, state and 1280 × 800 viewport. Only `?variant=before|after` changes the visual layer.
 
 | Surface | Before | After | Material refinement |
 | --- | --- | --- | --- |
-| Operational dashboard | ![Functional dashboard baseline](examples/dashboard/before.png) | ![Refined operational dashboard](examples/dashboard/after.png) | hierarchy, metric scan path, rhythm, semantic status |
-| Settings form | ![Functional settings baseline](examples/settings/before.png) | ![Refined settings form](examples/settings/after.png) | grouping, control clarity, primary action, focus visibility |
-| Data table | ![Functional table baseline](examples/data-table/before.png) | ![Refined data table](examples/data-table/after.png) | density, alignment, status semantics, row scan path |
+| Release control room | ![Functional release-control baseline](examples/dashboard/before.png) | ![Refined release-control room](examples/dashboard/after.png) | time-oriented stage matrix, blocker priority, event chronology |
+| Guided workspace setup | ![Functional setup baseline](examples/settings/before.png) | ![Refined workspace setup](examples/settings/after.png) | sequential progress, field clarity, live output preview |
+| Webhook inspector | ![Functional webhook-inspector baseline](examples/data-table/before.png) | ![Refined webhook inspector](examples/data-table/after.png) | event stream, code payload, delivery context and replay |
 
 Open any fixture locally with `?variant=before` or `?variant=after`. The evidence contract for each case is stored beside its HTML in `evidence.json`; the skill's publication rules live in `references/demonstration-protocol.md`.
 

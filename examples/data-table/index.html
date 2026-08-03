@@ -1,22 +1,31 @@
 <!doctype html>
 <html lang="en" data-variant="after">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Asset Review Queue — Functional → Refined benchmark</title><script>document.documentElement.dataset.variant=new URLSearchParams(location.search).get('variant')==='before'?'before':'after'</script><link rel="stylesheet" href="../assets/demo.css"></head>
-<body>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Webhook Inspector — Functional → Refined benchmark</title><script>document.documentElement.dataset.variant=new URLSearchParams(location.search).get('variant')==='before'?'before':'after'</script><link rel="stylesheet" href="../assets/demo.css"></head>
+<body class="benchmark benchmark--trace">
   <div class="benchmark-note"><strong>Synthetic benchmark</strong> Matched content, behavior and 1280 × 800 viewport · <span data-variant-label>after</span></div>
-  <div class="demo-shell">
-    <aside class="sidebar"><div class="brand"><span class="brand-mark">F</span> Frameflow</div><nav class="nav" aria-label="Primary"><a href="#"><span class="nav-icon">⌂</span> Home</a><a class="active" href="#"><span class="nav-icon">▦</span> Review queue</a><a href="#"><span class="nav-icon">◇</span> Collections</a><a href="#"><span class="nav-icon">◎</span> Contributors</a><a href="#"><span class="nav-icon">⚙</span> Settings</a></nav></aside>
-    <main class="main">
-      <header class="topbar"><div class="page-heading"><span class="eyebrow">Content operations</span><h1>Asset review queue</h1><p class="page-copy">Review, assign and publish incoming production assets.</p></div><div class="actions"><button class="button primary" data-action data-message="Upload flow opened">Upload assets</button></div></header>
-      <section class="panel table-panel">
-        <div class="table-toolbar"><div class="search"><input type="search" data-table-search placeholder="Search assets" aria-label="Search assets"></div><div class="filters"><button class="active" data-tab>All 24</button><button data-tab>Needs review 6</button><button data-tab>Approved 18</button></div></div>
-        <div class="table-wrap"><table><thead><tr><th>Asset</th><th>Status</th><th>Owner</th><th>Updated</th><th class="numeric">Size</th><th><span class="sr-only">Actions</span></th></tr></thead><tbody>
-          <tr><td><div class="asset"><span class="thumb"></span><span><strong>launch-hero-v4.jpg</strong><small>Campaign / Summer</small></span></div></td><td><span class="status warning">Needs review</span></td><td><span class="owner"><span class="avatar">MK</span>Maya K.</span></td><td>8 min ago</td><td class="numeric">4.8 MB</td><td><button class="row-action" data-action data-message="Asset menu opened">•••</button></td></tr>
-          <tr><td><div class="asset"><span class="thumb"></span><span><strong>product-tour-02.mp4</strong><small>Product / Onboarding</small></span></div></td><td><span class="status success">Approved</span></td><td><span class="owner"><span class="avatar">AL</span>Alex L.</span></td><td>24 min ago</td><td class="numeric">18.2 MB</td><td><button class="row-action" data-action data-message="Asset menu opened">•••</button></td></tr>
-          <tr><td><div class="asset"><span class="thumb"></span><span><strong>pricing-icons.svg</strong><small>Website / Pricing</small></span></div></td><td><span class="status danger">Changes needed</span></td><td><span class="owner"><span class="avatar">RP</span>Ravi P.</span></td><td>1 hr ago</td><td class="numeric">86 KB</td><td><button class="row-action" data-action data-message="Asset menu opened">•••</button></td></tr>
-          <tr><td><div class="asset"><span class="thumb"></span><span><strong>case-study-cover.png</strong><small>Editorial / Stories</small></span></div></td><td><span class="status success">Approved</span></td><td><span class="owner"><span class="avatar">JS</span>Jo S.</span></td><td>2 hrs ago</td><td class="numeric">2.1 MB</td><td><button class="row-action" data-action data-message="Asset menu opened">•••</button></td></tr>
-          <tr><td><div class="asset"><span class="thumb"></span><span><strong>email-header-dark.jpg</strong><small>Lifecycle / Retention</small></span></div></td><td><span class="status warning">Needs review</span></td><td><span class="owner"><span class="avatar">MK</span>Maya K.</span></td><td>3 hrs ago</td><td class="numeric">1.4 MB</td><td><button class="row-action" data-action data-message="Asset menu opened">•••</button></td></tr>
-        </tbody></table></div>
-      </section>
+  <div class="trace-shell">
+    <header class="trace-header"><a class="trace-brand" href="#">HOOKTRACE <span>/ live</span></a><div class="endpoint"><span class="signal"></span><b>checkout-events</b><code>/v1/hooks/checkout</code></div><button class="trace-primary" data-action data-message="Test event sent">Send test event</button></header>
+    <main class="trace-workspace">
+      <section class="event-stream" aria-label="Event stream"><header><div><span class="eyebrow">Incoming</span><h1>Event stream</h1></div><span class="stream-count">24</span></header><div class="trace-search"><input type="search" data-list-search placeholder="Filter by event or ID" aria-label="Filter events"></div><div class="event-list" role="list">
+        <button class="event active" data-search-item data-tab><span><i class="event-status ok"></i><b>checkout.completed</b></span><small>evt_92da · 11:48:09</small><em>200</em></button>
+        <button class="event" data-search-item data-tab><span><i class="event-status retry"></i><b>payment.failed</b></span><small>evt_75ab · 11:47:31</small><em>500</em></button>
+        <button class="event" data-search-item data-tab><span><i class="event-status ok"></i><b>refund.created</b></span><small>evt_18cf · 11:42:16</small><em>200</em></button>
+        <button class="event" data-search-item data-tab><span><i class="event-status ok"></i><b>customer.updated</b></span><small>evt_3c11 · 11:39:02</small><em>204</em></button>
+        <button class="event" data-search-item data-tab><span><i class="event-status pending"></i><b>invoice.created</b></span><small>evt_a82e · 11:34:44</small><em>202</em></button>
+      </div></section>
+      <section class="payload-pane" aria-label="Payload"><header><div><span class="eyebrow">Selected event</span><h2>checkout.completed</h2></div><div class="payload-tabs"><button class="active" data-tab>Payload</button><button data-tab>Headers</button></div></header><pre><code><span>{</span>
+  <span class="code-key">"id"</span>: <span class="code-string">"evt_92da"</span>,
+  <span class="code-key">"created_at"</span>: <span class="code-string">"2026-08-03T11:48:09Z"</span>,
+  <span class="code-key">"type"</span>: <span class="code-string">"checkout.completed"</span>,
+  <span class="code-key">"data"</span>: <span>{</span>
+    <span class="code-key">"order_id"</span>: <span class="code-string">"ord_4481"</span>,
+    <span class="code-key">"amount"</span>: <span class="code-number">14800</span>,
+    <span class="code-key">"currency"</span>: <span class="code-string">"EUR"</span>,
+    <span class="code-key">"customer"</span>: <span class="code-string">"cus_829a"</span>
+  <span>}</span>
+<span>}</span></code></pre></section>
+      <aside class="delivery-pane"><header><span class="eyebrow">Delivery</span><h2>Attempt #1</h2></header><div class="delivery-result"><span>HTTP response</span><strong>200 OK</strong><small>342 ms</small></div><dl><div><dt>Destination</dt><dd>api.orbit.so/webhooks</dd></div><div><dt>Received</dt><dd>11:48:09.342</dd></div><div><dt>Signature</dt><dd>Verified</dd></div></dl><button class="replay-action" data-action data-message="Event replayed">Replay event</button><div class="delivery-log"><span>Response body</span><code>{ "received": true }</code></div></aside>
     </main>
-  </div><div class="toast" role="status" aria-live="polite"></div><script src="../assets/demo.js"></script>
+  </div>
+  <div class="toast" role="status" aria-live="polite"></div><script src="../assets/demo.js"></script>
 </body></html>

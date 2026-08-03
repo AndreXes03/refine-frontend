@@ -1,10 +1,18 @@
 {
-  "id": "settings-workspace",
-  "title": "Settings form",
+  "id": "workspace-setup-defaults",
+  "title": "Guided workspace setup",
   "classification": "synthetic-benchmark",
-  "surface": "Workspace settings form",
+  "surface": "Workspace defaults configurator",
   "viewport": { "width": 1280, "height": 800 },
-  "invariants": ["Same labels, values and helper copy", "Same form controls and save action", "Same tab behavior", "No new dependency"],
-  "changes": ["Grouped related fields", "Increased control and target clarity", "Separated primary action from navigation", "Added visible keyboard focus"],
-  "verification": ["Matched viewport screenshots", "Fields and switches exercised", "390px page overflow check", "Keyboard focus inspection"]
+  "patternSelection": {
+    "taskTopology": "configure in sequence",
+    "dominantArtifact": "single setup step",
+    "navigationModel": "four-step progress path",
+    "compositionModel": "focused form with live output preview",
+    "productSpecificSignals": ["workspace URL preview", "persistent setup progress"],
+    "mobileTransformation": "keep the form sequence first and move the preview below without duplicating the primary action"
+  },
+  "invariants": ["Same labels, values and helper copy", "Same controls and continuation action", "Same step behavior", "No new dependency"],
+  "changes": ["Focused the page on one setup step", "Made progress and continuation unambiguous", "Linked values to a live workspace preview", "Reduced container and border repetition"],
+  "verification": ["Matched viewport screenshots", "Fields and choices exercised", "390px page overflow check", "Keyboard focus inspection"]
 }

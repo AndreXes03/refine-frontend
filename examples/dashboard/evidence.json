@@ -1,10 +1,18 @@
 {
-  "id": "dashboard-release-health",
-  "title": "Operational dashboard",
+  "id": "release-control-train",
+  "title": "Release control room",
   "classification": "synthetic-benchmark",
-  "surface": "Release health dashboard",
+  "surface": "Multi-service release train",
   "viewport": { "width": 1280, "height": 800 },
-  "invariants": ["Same copy and data", "Same navigation and controls", "Same responsive breakpoint", "No new dependency"],
-  "changes": ["Strengthened page and metric hierarchy", "Reduced border noise", "Aligned semantic statuses", "Improved rhythm and focus visibility"],
+  "patternSelection": {
+    "taskTopology": "monitor and unblock",
+    "dominantArtifact": "service-by-stage release sequence",
+    "navigationModel": "horizontal operational navigation",
+    "compositionModel": "time-oriented stage matrix with adjacent event log",
+    "productSpecificSignals": ["release window countdown", "service commit and promotion stages"],
+    "mobileTransformation": "preserve the release sequence as a horizontal inspection surface, then place the chronological log below"
+  },
+  "invariants": ["Same services, stages and log entries", "Same navigation and actions", "Same responsive breakpoint", "No new dependency"],
+  "changes": ["Made the release sequence the dominant artifact", "Separated blocking from completed stages", "Reduced grid noise without hiding density", "Kept the event log chronologically adjacent"],
   "verification": ["Matched viewport screenshots", "Primary controls exercised", "390px page overflow check", "Keyboard focus inspection"]
 }

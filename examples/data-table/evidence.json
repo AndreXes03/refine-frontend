@@ -1,10 +1,18 @@
 {
-  "id": "data-table-review-queue",
-  "title": "Data table",
+  "id": "webhook-inspector-stream",
+  "title": "Webhook inspector",
   "classification": "synthetic-benchmark",
-  "surface": "Asset review queue",
+  "surface": "Live webhook debugging workspace",
   "viewport": { "width": 1280, "height": 800 },
-  "invariants": ["Same rows, columns and statuses", "Same search and row actions", "Same filters", "No new dependency"],
-  "changes": ["Reduced gridline noise", "Improved scan paths and numeric alignment", "Clarified semantic statuses", "Preserved horizontal table access on small screens"],
-  "verification": ["Matched viewport screenshots", "Search and actions exercised", "390px page overflow check", "Keyboard focus inspection"]
+  "patternSelection": {
+    "taskTopology": "inspect and replay",
+    "dominantArtifact": "selected event payload",
+    "navigationModel": "persistent event stream",
+    "compositionModel": "event list, code payload and delivery inspector",
+    "productSpecificSignals": ["HTTP delivery attempt", "signed event payload"],
+    "mobileTransformation": "stack stream, payload and delivery details in debugging order while keeping replay attached to the delivery"
+  },
+  "invariants": ["Same events, payload and delivery metadata", "Same filter, tabs and replay action", "Same responsive breakpoint", "No new dependency"],
+  "changes": ["Turned the selected payload into the visual anchor", "Separated event identity from HTTP outcome", "Improved code and timestamp scanning", "Kept replay with its delivery context"],
+  "verification": ["Matched viewport screenshots", "Filter, tabs and actions exercised", "390px page overflow check", "Keyboard focus inspection"]
 }

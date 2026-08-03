@@ -60,6 +60,7 @@ def validate_skill() -> None:
 
 def validate_examples() -> None:
     cases = {"dashboard", "settings", "data-table"}
+    fingerprints: set[tuple[str, str, str]] = set()
     for case in cases:
         directory = ROOT / "examples" / case
         document = (directory / "index.html").read_text(encoding="utf-8")
@@ -72,6 +73,18 @@ def validate_examples() -> None:
             raise AssertionError(f"{case} must use one shared document for both variants")
         if "data-variant" not in document or "Synthetic benchmark" not in document:
             raise AssertionError(f"{case} is missing comparison safeguards")
+        selection = evidence.get("patternSelection", {})
+        fingerprint = tuple(
+            selection.get(key, "")
+            for key in ("taskTopology", "navigationModel", "compositionModel")
+        )
+        if not all(fingerprint) or fingerprint in fingerprints:
+            raise AssertionError(f"{case} is missing a distinct structural pattern")
+        fingerprints.add(fingerprint)
+        if len(selection.get("productSpecificSignals", [])) < 2:
+            raise AssertionError(f"{case} needs at least two product-specific signals")
+        if not selection.get("mobileTransformation"):
+            raise AssertionError(f"{case} is missing a task-preserving mobile transformation")
         for capture in ("before.png", "after.png"):
             path = directory / capture
             if not path.is_file() or path.stat().st_size < 10_000:
@@ -114,6 +127,44 @@ def integration_checks() -> None:
         project.mkdir()
         run(sys.executable, str(UTILITY), "init", "--project", str(project), "--surface", "Settings")
         run(sys.executable, str(UTILITY), "validate", "--project", str(project))
+        incomplete = subprocess.run(
+            [sys.executable, str(UTILITY), "validate", "--strict", "--project", str(project)],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+        )
+        if incomplete.returncode == 0 or "TODO placeholder" not in incomplete.stderr:
+            raise AssertionError("Strict validation must reject an incomplete pattern contract")
+
+        contract_path = project / ".visual-refactor" / "visual-contract.json"
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
+        for legacy_missing_key in (
+            "dominantArtifact",
+            "productSpecificSignals",
+            "alternativePattern",
+            "mobileTransformation",
+        ):
+            contract["patternSelection"].pop(legacy_missing_key)
+        contract_path.write_text(json.dumps(contract, indent=2) + "\n", encoding="utf-8")
+        run(sys.executable, str(UTILITY), "validate", "--project", str(project))
+
+        contract["patternSelection"].update(
+            {
+                "taskTopology": "configure",
+                "dominantArtifact": "workspace configuration",
+                "nativePattern": "focused settings form",
+                "navigationModel": "product shell with local settings navigation",
+                "compositionModel": "single reading column with progressive sections",
+                "existingPrimitives": ["settings-nav", "field-group", "save-bar"],
+                "productSpecificSignals": ["workspace identity preview", "persistent save state"],
+                "alternativePattern": "two-pane settings inspector",
+                "rejectedDefaults": ["dashboard metric grid"],
+                "mobileTransformation": "keep one form sequence and preserve save status",
+                "rationale": "Configuration needs continuity rather than monitoring widgets.",
+            }
+        )
+        contract_path.write_text(json.dumps(contract, indent=2) + "\n", encoding="utf-8")
+        run(sys.executable, str(UTILITY), "validate", "--strict", "--project", str(project))
         run(
             sys.executable,
             str(UTILITY),
@@ -133,9 +184,7 @@ def integration_checks() -> None:
         )
         if feedback["decisions"][0]["status"] != "rejected":
             raise AssertionError("Feedback was not persisted")
-        contract = json.loads(
-            (project / ".visual-refactor" / "visual-contract.json").read_text(encoding="utf-8")
-        )
+        contract = json.loads(contract_path.read_text(encoding="utf-8"))
         if contract.get("patternSelection", {}).get("convergenceRisk") != "medium":
             raise AssertionError("Pattern selection contract was not initialized")
 

@@ -35,6 +35,8 @@ Keep v0.1 work to existing product UI—dashboards, tools, SaaS screens, forms, 
 
 Identify one surface, its primary task, the densest realistic state, and the smallest supported viewport. Inspect the repository before proposing visual changes.
 
+Locate the actual design evidence: shared components, tokens, typography, icon source, brand assets, layout primitives, and at least one adjacent product surface. Do not substitute emoji, text glyphs, approximate icons, a new font, or a generic component library for assets the product already owns.
+
 Run the project's existing build, tests, lint, or typecheck in proportion to the change. Capture baseline screenshots at desktop and mobile; add tablet only when layout behavior materially changes there.
 
 If `.visual-refactor/` exists, read `visual-contract.json`, `visual-feedback.json`, and `change-ledger.md` before making decisions. Do not repeat a rejected rule unless new evidence or a changed constraint justifies it.
@@ -63,7 +65,7 @@ refinement_depth: foundations | surface | system
 
 High interaction load or information density lowers the expression budget. Favor familiar patterns, stable geometry, legibility, and state clarity. Low-load surfaces may support one stronger expressive decision.
 
-Then map the surface's native pattern before styling it. Record the primary task verb, dominant artifact, navigation model, reading or scan direction, density model, existing system primitives, and the default treatments most likely to be copied without evidence. Complete `patternSelection` in the visual contract.
+Then map the surface's native pattern before styling it. Record the primary task verb, dominant artifact, navigation model, reading or scan direction, density model, existing system primitives, and the default treatments most likely to be copied without evidence. Complete `patternSelection` in the visual contract, including at least two product-specific signals and the intended mobile transformation.
 
 Do not import the shell of an unrelated reference. A monitoring dashboard, configuration form, review queue, editor, and workflow canvas may share tokens without sharing composition. Familiar patterns are valid when the task and existing product justify them; difference for its own sake is not.
 
@@ -78,6 +80,13 @@ Reject the plan when any of these are true:
 - color, radius, and spacing change while the task hierarchy and interaction model stay generic;
 - a reference example donates its visual grammar instead of helping expose the current product's constraints;
 - every region receives equal container treatment instead of earning grouping through task structure.
+
+Run a specificity check before implementation:
+
+- if product names and accent colors were hidden, the composition should still communicate the task;
+- at least two recorded product-specific signals must remain visible in the planned result;
+- the mobile plan must preserve task priority and action access, not merely stack every desktop region;
+- the plan must name which existing primitives it extends and which default pattern it rejects.
 
 Use [research-and-rules.md](references/research-and-rules.md) for the evidence basis. Treat this gate as productive friction: it prevents automatic pattern reuse without authorizing a redesign.
 
@@ -155,6 +164,8 @@ Verification has three independent gates:
 - Confirm clearer hierarchy, more coherent rhythm, contextual fit, and no brand drift.
 - Confirm that the selected composition follows the recorded task topology rather than a reusable agent default.
 - Compare the result with the rejected defaults in `patternSelection`; fail the gate if they reappear without new evidence.
+- Temporarily ignore brand names and accent color; fail the gate if the result becomes interchangeable with an unrelated product surface.
+- Confirm that at least two product-specific signals and the documented mobile transformation are visible in the evidence.
 - Ask whether every added visual element has a job.
 - Reject a prettier screenshot if usability or behavior regressed.
 
@@ -174,11 +185,13 @@ python3 <skill-dir>/scripts/refine_workspace.py feedback \
 
 Allowed statuses are `accepted`, `modified`, `rejected`, and `reverted`. Feedback is project evidence, not a universal design rule.
 
-Validate the workspace before sign-off:
+Strictly validate the completed workspace before sign-off:
 
 ```bash
-python3 <skill-dir>/scripts/refine_workspace.py validate --project <project-root>
+python3 <skill-dir>/scripts/refine_workspace.py validate --strict --project <project-root>
 ```
+
+Plain `validate` keeps legacy workspaces readable. `validate --strict` is the release gate and rejects placeholders or an incomplete specificity contract.
 
 ## Final response
 

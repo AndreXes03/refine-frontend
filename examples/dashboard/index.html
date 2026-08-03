@@ -3,37 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Release Console — Functional → Refined benchmark</title>
+  <title>Release Control — Functional → Refined benchmark</title>
   <script>document.documentElement.dataset.variant=new URLSearchParams(location.search).get('variant')==='before'?'before':'after'</script>
   <link rel="stylesheet" href="../assets/demo.css">
 </head>
-<body>
+<body class="benchmark benchmark--ops">
   <div class="benchmark-note"><strong>Synthetic benchmark</strong> Matched content, behavior and 1280 × 800 viewport · <span data-variant-label>after</span></div>
-  <div class="demo-shell">
-    <aside class="sidebar">
-      <div class="brand"><span class="brand-mark">R</span> Relay</div>
-      <nav class="nav" aria-label="Primary">
-        <a class="active" href="#"><span class="nav-icon">●</span> Overview</a>
-        <a href="#"><span class="nav-icon">↗</span> Deployments</a>
-        <a href="#"><span class="nav-icon">◇</span> Environments</a>
-        <a href="#"><span class="nav-icon">!</span> Incidents</a>
-        <a href="#"><span class="nav-icon">⚙</span> Settings</a>
-      </nav>
-    </aside>
-    <main class="main">
-      <header class="topbar">
-        <div class="page-heading"><span class="eyebrow">Production</span><h1>Release health</h1><p class="page-copy">Delivery performance across the last 30 days.</p></div>
-        <div class="actions"><button class="button" data-action data-message="Report exported">Export</button><button class="button primary" data-action data-message="Deployment started">New deployment</button></div>
-      </header>
-      <section class="metrics" aria-label="Key metrics">
-        <article class="panel metric"><span class="metric-label">Deployment success</span><div class="metric-value">97.8%</div><span class="status success">+1.4% this month</span></article>
-        <article class="panel metric"><span class="metric-label">Median cycle time</span><div class="metric-value">18m</div><span class="status success">4m faster</span></article>
-        <article class="panel metric"><span class="metric-label">Open incidents</span><div class="metric-value">3</div><span class="status warning">1 needs review</span></article>
+  <div class="ops-shell">
+    <header class="ops-header">
+      <a class="ops-brand" href="#" aria-label="Relay home"><span class="ops-wordmark">RELAY</span><span>CONTROL</span></a>
+      <nav class="ops-nav" aria-label="Primary"><a class="active" href="#">Release train</a><a href="#">Services</a><a href="#">Incidents</a></nav>
+      <div class="ops-environment"><span class="signal" aria-hidden="true"></span><span><b>Production</b><small>eu-west-1</small></span></div>
+    </header>
+    <main class="ops-main">
+      <section class="ops-summary">
+        <div><span class="eyebrow">Thursday release window</span><h1>Checkout train #2841</h1><p>Five services moving toward production. One manual review is blocking the window.</p></div>
+        <div class="ops-kpis" aria-label="Release summary"><div><strong>4/5</strong><span>services clear</span></div><div><strong>18m</strong><span>cycle time</span></div><div><strong>12:42</strong><span>window closes</span></div></div>
+        <button class="ops-primary" data-action data-message="Deployment approval opened">Review blocker</button>
       </section>
-      <section class="dashboard-grid">
-        <article class="panel"><div class="panel-title"><div><h2>Deployments per day</h2><p class="page-copy">Successful production releases</p></div><div class="segmented"><button data-tab>7D</button><button class="active" data-tab>30D</button></div></div><div class="chart" aria-label="Bar chart"><div class="bar" style="height:42%"><span>Mon</span></div><div class="bar" style="height:65%"><span>Tue</span></div><div class="bar" style="height:54%"><span>Wed</span></div><div class="bar highlight" style="height:88%"><span>Thu</span></div><div class="bar" style="height:72%"><span>Fri</span></div><div class="bar" style="height:46%"><span>Sat</span></div><div class="bar" style="height:58%"><span>Sun</span></div></div></article>
-        <article class="panel"><div class="panel-title"><div><h2>Recent deployments</h2><p class="page-copy">Latest production activity</p></div></div><div class="deployments"><div class="deployment"><div><strong>checkout-api</strong><small>12 minutes ago · #2841</small></div><span class="status success">Live</span></div><div class="deployment"><div><strong>merchant-web</strong><small>43 minutes ago · #917</small></div><span class="status success">Live</span></div><div class="deployment"><div><strong>billing-worker</strong><small>1 hour ago · #612</small></div><span class="status warning">Review</span></div><div class="deployment"><div><strong>identity-api</strong><small>3 hours ago · #1432</small></div><span class="status success">Live</span></div></div></article>
+      <section class="ops-board" aria-label="Release progress">
+        <div class="ops-board-head"><div><h2>Release sequence</h2><p>Live state across verification stages</p></div><div class="ops-legend"><span><i class="stage-dot done"></i>Passed</span><span><i class="stage-dot active"></i>Running</span><span><i class="stage-dot hold"></i>Held</span></div></div>
+        <div class="release-grid" role="table" aria-label="Service release stages">
+          <div class="release-row release-row--head" role="row"><span>Service</span><span>Build</span><span>Test</span><span>Canary</span><span>Live</span></div>
+          <div class="release-row" role="row"><span class="service"><b>checkout-api</b><small>8f34ad2</small></span><span class="stage done">Passed</span><span class="stage done">Passed</span><span class="stage active">Running · 62%</span><span class="stage idle">Waiting</span></div>
+          <div class="release-row" role="row"><span class="service"><b>merchant-web</b><small>917c4e0</small></span><span class="stage done">Passed</span><span class="stage done">Passed</span><span class="stage done">Passed</span><span class="stage done">Live</span></div>
+          <div class="release-row" role="row"><span class="service"><b>billing-worker</b><small>612b0f9</small></span><span class="stage done">Passed</span><span class="stage hold">Review</span><span class="stage idle">Waiting</span><span class="stage idle">Waiting</span></div>
+          <div class="release-row" role="row"><span class="service"><b>identity-api</b><small>1432d8a</small></span><span class="stage done">Passed</span><span class="stage done">Passed</span><span class="stage done">Passed</span><span class="stage done">Live</span></div>
+        </div>
       </section>
+      <aside class="ops-feed" aria-label="Release log"><div class="ops-feed-head"><h2>Window log</h2><button data-action data-message="Log copied">Copy log</button></div><ol><li><time>11:48</time><span><b>checkout-api</b> entered canary at 10% traffic.</span></li><li><time>11:43</time><span><b>billing-worker</b> needs schema review.</span></li><li><time>11:31</time><span><b>merchant-web</b> reached production.</span></li><li><time>11:22</time><span>Release window opened by Maya K.</span></li></ol></aside>
     </main>
-  </div><div class="toast" role="status" aria-live="polite"></div><script src="../assets/demo.js"></script>
+  </div>
+  <div class="toast" role="status" aria-live="polite"></div><script src="../assets/demo.js"></script>
 </body></html>
