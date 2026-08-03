@@ -37,6 +37,8 @@ def validate_skill() -> None:
         raise AssertionError("Skill description is not sufficiently descriptive")
     if len(text.splitlines()) > 500:
         raise AssertionError("SKILL.md exceeds the progressive-disclosure limit")
+    if "anti-convergence gate" not in text or "patternSelection" not in text:
+        raise AssertionError("SKILL.md is missing the pattern-convergence guardrail")
 
     agent = yaml.safe_load((SKILL / "agents" / "openai.yaml").read_text(encoding="utf-8"))
     interface = agent.get("interface", {})
@@ -131,6 +133,11 @@ def integration_checks() -> None:
         )
         if feedback["decisions"][0]["status"] != "rejected":
             raise AssertionError("Feedback was not persisted")
+        contract = json.loads(
+            (project / ".visual-refactor" / "visual-contract.json").read_text(encoding="utf-8")
+        )
+        if contract.get("patternSelection", {}).get("convergenceRisk") != "medium":
+            raise AssertionError("Pattern selection contract was not initialized")
 
 
 def packaging_check() -> None:

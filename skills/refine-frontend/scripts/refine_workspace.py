@@ -57,6 +57,16 @@ def contract_template(surface: str) -> dict[str, Any]:
             "refinementDepth": "surface",
             "rationale": "TODO",
         },
+        "patternSelection": {
+            "taskTopology": "TODO",
+            "nativePattern": "TODO",
+            "navigationModel": "TODO",
+            "compositionModel": "TODO",
+            "existingPrimitives": [],
+            "rejectedDefaults": [],
+            "convergenceRisk": "medium",
+            "rationale": "TODO",
+        },
         "invariants": [],
         "constraints": {
             "framework": "TODO",
@@ -150,6 +160,18 @@ def validate_contract(value: Any) -> list[str]:
             errors.append(f"contract.classification.{key} must be high, medium, or low")
     if classification.get("refinementDepth") not in DEPTHS:
         errors.append("contract.classification.refinementDepth must be foundations, surface, or system")
+
+    pattern_selection = root.get("patternSelection")
+    if pattern_selection is not None:
+        pattern_selection = require_mapping(pattern_selection, "contract.patternSelection", errors)
+        for key in ("taskTopology", "nativePattern", "navigationModel", "compositionModel", "rationale"):
+            if not isinstance(pattern_selection.get(key), str) or not pattern_selection.get(key, "").strip():
+                errors.append(f"contract.patternSelection.{key} must be a non-empty string")
+        for key in ("existingPrimitives", "rejectedDefaults"):
+            if not isinstance(pattern_selection.get(key), list):
+                errors.append(f"contract.patternSelection.{key} must be an array")
+        if pattern_selection.get("convergenceRisk") not in LEVELS:
+            errors.append("contract.patternSelection.convergenceRisk must be high, medium, or low")
 
     invariants = root.get("invariants")
     if not isinstance(invariants, list):

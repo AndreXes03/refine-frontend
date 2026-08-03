@@ -33,6 +33,7 @@ The frontend-skill ecosystem already has strong tools for generating bold interf
 - **Existing-product first** — product UI, dashboards, tools, settings, forms, tables and operational software.
 - **Constraint first** — routing, business logic, data, semantics, tests and public APIs are frozen before visual edits.
 - **Foundation before expression** — hierarchy, geometry and rhythm are fixed before one optional signature move.
+- **Task-specific pattern selection** — the skill records the native interaction topology and rejects generic shells that could fit any product.
 - **Persistent visual contract** — decisions survive the current agent session in `.visual-refactor/visual-contract.json`.
 - **Human feedback memory** — accepted, modified, rejected and reverted choices are recorded for later passes.
 - **Evidence instead of adjectives** — the skill asks for matched before/after states and independent functional, technical-visual and design gates.
@@ -107,11 +108,12 @@ Restart Claude Code, then invoke `/refine-frontend` or ask Claude to use the ski
 1. Inspect one working surface and its densest realistic state.
 2. Freeze functional, technical, content and brand invariants.
 3. Classify interaction load, information density, expression need and refinement depth.
-4. Compile a machine-readable foundation and signature contract.
-5. Prioritize three to five coherent changes by impact, recurrence and confidence.
-6. Refactor typography, composition, rhythm, semantic color, morphology and states—in that order.
-7. Verify behavior, technical visual integrity and contextual design quality as separate gates.
-8. Persist implementation decisions and human feedback.
+4. Map the task topology and reject context-free pattern defaults.
+5. Compile a machine-readable foundation, pattern and signature contract.
+6. Prioritize three to five coherent changes by impact, recurrence and confidence.
+7. Refactor typography, composition, rhythm, semantic color, morphology and states—in that order.
+8. Verify behavior, technical visual integrity, contextual design quality and convergence risk as separate gates.
+9. Persist implementation decisions and human feedback.
 
 ## Research basis
 

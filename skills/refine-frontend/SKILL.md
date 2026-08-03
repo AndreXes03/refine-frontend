@@ -63,7 +63,25 @@ refinement_depth: foundations | surface | system
 
 High interaction load or information density lowers the expression budget. Favor familiar patterns, stable geometry, legibility, and state clarity. Low-load surfaces may support one stronger expressive decision.
 
-### 4. Initialize or update the visual contract
+Then map the surface's native pattern before styling it. Record the primary task verb, dominant artifact, navigation model, reading or scan direction, density model, existing system primitives, and the default treatments most likely to be copied without evidence. Complete `patternSelection` in the visual contract.
+
+Do not import the shell of an unrelated reference. A monitoring dashboard, configuration form, review queue, editor, and workflow canvas may share tokens without sharing composition. Familiar patterns are valid when the task and existing product justify them; difference for its own sake is not.
+
+### 4. Run the anti-convergence gate
+
+Before editing code, name at least two plausible pattern families within the frozen invariants: the safest continuation of the existing system and one task-specific alternative. Select one with a written rationale and record the rejected default.
+
+Reject the plan when any of these are true:
+
+- the same sidebar, topbar, card grid, metric row, or split-panel shell would be chosen for a materially different task;
+- the perceived improvement depends mainly on a pale canvas, rounded white cards, blue primary actions, pill badges, soft shadows, or generous empty space;
+- color, radius, and spacing change while the task hierarchy and interaction model stay generic;
+- a reference example donates its visual grammar instead of helping expose the current product's constraints;
+- every region receives equal container treatment instead of earning grouping through task structure.
+
+Use [research-and-rules.md](references/research-and-rules.md) for the evidence basis. Treat this gate as productive friction: it prevents automatic pattern reuse without authorizing a redesign.
+
+### 5. Initialize or update the visual contract
 
 Run:
 
@@ -82,7 +100,7 @@ The contract has two layers:
 
 Foundation is mandatory. Signature is optional and must never compensate for weak structure.
 
-### 5. Diagnose before editing
+### 6. Diagnose before editing
 
 Read [research-and-rules.md](references/research-and-rules.md). Distinguish three kinds of evidence:
 
@@ -92,7 +110,7 @@ Read [research-and-rules.md](references/research-and-rules.md). Distinguish thre
 
 Rank findings by user impact, recurrence, and confidence. Limit the first pass to three to five coherent changes. Prefer root fixes in tokens or shared components when the inconsistency recurs; prefer local fixes when the issue is surface-specific.
 
-### 6. Refactor in impact order
+### 7. Refactor in impact order
 
 Work in this order:
 
@@ -114,7 +132,7 @@ For each change, record:
 - the invariant and verification checks;
 - whether the choice is foundation or signature.
 
-### 7. Prove the result
+### 8. Prove the result
 
 Verification has three independent gates:
 
@@ -135,12 +153,14 @@ Verification has three independent gates:
 
 - Compare before and after at the same viewport and state.
 - Confirm clearer hierarchy, more coherent rhythm, contextual fit, and no brand drift.
+- Confirm that the selected composition follows the recorded task topology rather than a reusable agent default.
+- Compare the result with the rejected defaults in `patternSelection`; fail the gate if they reappear without new evidence.
 - Ask whether every added visual element has a job.
 - Reject a prettier screenshot if usability or behavior regressed.
 
 See [verification.md](references/verification.md) for the sign-off protocol. When the result will be published or used as proof, also follow [demonstration-protocol.md](references/demonstration-protocol.md) so the pair keeps the same content, behavior, state and viewport and clearly labels synthetic fixtures.
 
-### 8. Persist decisions and feedback
+### 9. Persist decisions and feedback
 
 Append accepted implementation decisions to `.visual-refactor/change-ledger.md`. Record user responses with:
 

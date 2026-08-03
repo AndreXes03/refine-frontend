@@ -46,6 +46,25 @@ Sources:
 - N. Tractinsky, A. S. Katz, and D. Ikar, *What is beautiful is usable* (2000): https://cris.bgu.ac.il/en/publications/what-is-beautiful-is-usable-2/
 - Alexandre N. Tuch et al., *Is beautiful really usable?* (2012): https://edoc.unibas.ch/entities/publication/ebcfa3de-1a92-4195-b6fd-ab67d80af2aa
 
+### Add productive friction against pattern convergence
+
+Jansson and Smith found that exposure to example solutions can produce design fixation: designers reproduced example features, including features that were explicitly flawed. More recent work on AI-assisted web creation identifies homogenization risk when frictionless generation reproduces dominant conventions instead of preserving contextual expression. A 2026 meta-analysis across 19 human-AI co-creation studies also reported a small but statistically significant homogenization effect, with the strength depending on task structure.
+
+Operational translation:
+
+- inspect references for principles and constraints, then return to the product before selecting a shell;
+- describe the task topology and existing interaction model before naming a visual pattern;
+- create productive friction by recording one contextual alternative and one rejected default before editing;
+- audit structure separately from palette so color variation cannot masquerade as design diversity;
+- fail a multi-example benchmark when unrelated surfaces share the same composition without a task-based reason;
+- do not turn anti-homogenization into novelty theater—familiarity remains useful when it supports the task.
+
+Sources:
+
+- David G. Jansson and Steven M. Smith, *Design fixation* (1991), DOI 10.1016/0142-694X(91)90003-F: https://doi.org/10.1016/0142-694X(91)90003-F
+- Donghoon Shin et al., *Interrogating Design Homogenization in Web Vibe Coding* (2026): https://www.microsoft.com/en-us/research/publication/interrogating-design-homogenization-in-web-vibe-coding/
+- Alwin de Rooij and Michael Mose Biskjaer, *Does generative AI make us think alike?* (2026): https://doi.org/10.31234/osf.io/rz5s4_v1
+
 ## Standards-backed technical rules
 
 These checks can identify likely failures, but this skill does not certify WCAG conformance.
@@ -68,6 +87,8 @@ Treat these as design hypotheses, not standards:
 - Make dense interfaces orderly rather than artificially spacious. Density is not clutter when grouping and hierarchy are clear.
 - Add motion only when it explains state change, continuity, causality, or hierarchy. Respect `prefers-reduced-motion`.
 - Keep a signature move specific enough to be remembered and restrained enough not to compete with the primary task.
+- Make the composition legible from the task: monitoring favors scanability, configuration favors continuity and recovery, triage favors comparison and action throughput, and creation favors direct manipulation or focused sequencing.
+- Audit recurring agent defaults explicitly: universal sidebars, interchangeable card grids, metric strips, blue primary buttons, pill badges, soft shadows, and rounded white panels. Use any of them only when the product system or task earns them.
 
 ## Claim discipline
 

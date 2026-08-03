@@ -20,6 +20,16 @@ The contract is a project-local decision record, not a design-system replacement
     "refinementDepth": "surface",
     "rationale": "Frequent operational form; clarity outranks novelty."
   },
+  "patternSelection": {
+    "taskTopology": "configure",
+    "nativePattern": "focused settings form",
+    "navigationModel": "product shell with local settings navigation",
+    "compositionModel": "single reading column with progressive sections",
+    "existingPrimitives": ["settings-nav", "field-group", "save-bar"],
+    "rejectedDefaults": ["dashboard metric grid", "generic card mosaic"],
+    "convergenceRisk": "medium",
+    "rationale": "The task is sequential configuration, not monitoring or triage."
+  },
   "invariants": [],
   "constraints": {
     "framework": "Next.js",
@@ -57,6 +67,10 @@ The contract is a project-local decision record, not a design-system replacement
 ## Decision rules
 
 - Record only rules that affect the named surface or a shared primitive it uses.
+- Derive `patternSelection` from the primary task, dominant artifact, information flow, and existing product system before choosing visual treatments.
+- Name at least one rejected default. A rejected default is a plausible but insufficiently contextual pattern, not a banned component.
+- Treat palette, radius, shadow, and spacing changes as polish rather than pattern differentiation.
+- Do not force novelty. Reuse a familiar pattern when it is the clearest match for the task, but document why it fits.
 - Prefer semantic roles (`action-primary`, `text-muted`) over raw values when the project already has or needs reusable tokens.
 - Preserve established brand values unless the user authorizes brand work.
 - Set `signature.enabled` only after foundation defects are resolved.
